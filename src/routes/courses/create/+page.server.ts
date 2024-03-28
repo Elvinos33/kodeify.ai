@@ -34,7 +34,7 @@ export const actions = {
 			return { success: true };
 		} else {
 			console.log(run.status);
-			return { failure: true };
+			return fail(503, { message: 'Failed to get response from OpenAI' });
 		}
 	}
 } satisfies Actions;

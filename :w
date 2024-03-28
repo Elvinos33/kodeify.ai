@@ -2,7 +2,7 @@
 	import { enhance } from '$app/forms';
 	import Combobox from '$lib/components/general/Combobox.svelte';
 	import type { ActionData } from './$types';
-	import { CircleDashed, CircleCheck, CircleX } from 'lucide-svelte';
+	import { CircleDashed, CircleCheck } from 'lucide-svelte';
 	import { fade } from 'svelte/transition';
 
 	export let form: ActionData;
@@ -29,19 +29,14 @@
 
 <main class="flex h-full flex-col items-center justify-center">
 	{#if loading}
-		<div in:fade class="flex flex-col items-center gap-4">
-			<CircleDashed size={48} strokeWidth={1} class="animate-spin" />
-			<h1 class="text-center text-xl font-semibold">Creating a course just for you.</h1>
+		<div class="flex flex-col items-center gap-2">
+			<CircleDashed size={64} strokeWidth={1.5} class="animate-spin" />
+			<h1 class="text-xl font-bold">Creating a course on {selectedTech} just for you.</h1>
 		</div>
 	{:else if success}
-		<div in:fade class="flex flex-col items-center gap-4">
-			<CircleCheck size={48} strokeWidth={1} />
-			<h1 class="text-center text-xl font-semibold">Hooray! Your new course has been created!</h1>
-		</div>
-	{:else if fail}
-		<div in:fade class="flex flex-col items-center gap-4">
-			<CircleX size={48} strokeWidth={1} />
-			<h1 class="text-center text-xl font-semibold">Oh no! An error occured, please try again.</h1>
+		<div in:fade class="flex flex-col items-center gap-2">
+			<CircleCheck size={64} strokeWidth={1.5} />
+			<h1 class="text-xl font-bold">Hooray! Your new {selectedTech} course has been created!</h1>
 		</div>
 	{:else}
 		<form
@@ -52,10 +47,12 @@
 				return ({ result, update }) => {
 					if (result.type === 'success') {
 						success = true;
+						console.log('yay');
 					} else if (result.type === 'failure') {
 						fail = true;
+						console.log('nay');
 					}
-					update().finally(() => (loading = false));
+					update().finally(() => loading = false);
 				};
 			}}
 		>
