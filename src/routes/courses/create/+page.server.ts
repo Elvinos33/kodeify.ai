@@ -27,11 +27,9 @@ export const actions = {
 
 		if (run.status === 'completed') {
 			const messages = await openai.beta.threads.messages.list(run.thread_id);
-			for (const message of messages.data.reverse()) {
-				console.log(`${message.role} > ${message.content[0].text.value}`);
-			}
+			console.log(messages.data[0].content[0].text.value);
 
-			return { success: true };
+			return { success: true, message: messages.data[0].content[0].text.value };
 		} else {
 			console.log(run.status);
 			return fail(503, { message: 'Failed to get response from OpenAI' });

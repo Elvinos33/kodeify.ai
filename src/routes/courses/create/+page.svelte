@@ -4,10 +4,14 @@
 	import type { ActionData } from './$types';
 	import { CircleDashed, CircleCheck, CircleX } from 'lucide-svelte';
 	import { fade } from 'svelte/transition';
+	import { marked } from 'marked';
 
 	export let form: ActionData;
 
 	let selectedTech = { value: '', label: '' };
+	let mkdown = ``;
+
+	$: if (form?.message) mkdown = form.message;
 
 	let loading = false;
 	let success = false;
@@ -33,10 +37,11 @@
 			<CircleDashed size={48} strokeWidth={1} class="animate-spin" />
 			<h1 class="text-center text-xl font-semibold">Creating a course just for you.</h1>
 		</div>
-	{:else if success}
+	{:else if success && form?.message}
 		<div in:fade class="flex flex-col items-center gap-4">
 			<CircleCheck size={48} strokeWidth={1} />
 			<h1 class="text-center text-xl font-semibold">Hooray! Your new course has been created!</h1>
+			<div>{@html marked(form?.message)}</div>
 		</div>
 	{:else if fail}
 		<div in:fade class="flex flex-col items-center gap-4">

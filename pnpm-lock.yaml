@@ -28,6 +28,9 @@ devDependencies:
   autoprefixer:
     specifier: ^10.4.16
     version: 10.4.19(postcss@8.4.38)
+  marked:
+    specifier: ^12.0.1
+    version: 12.0.1
   postcss:
     specifier: ^8.4.32
     version: 8.4.38
@@ -1227,6 +1230,12 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       '@jridgewell/sourcemap-codec': 1.4.15
+
+  /marked@12.0.1:
+    resolution: {integrity: sha512-Y1/V2yafOcOdWQCX0XpAKXzDakPOpn6U0YLxTJs3cww6VxOzZV1BTOOYWLvH3gX38cq+iLwljHHTnMtlDfg01Q==}
+    engines: {node: '>= 18'}
+    hasBin: true
+    dev: true
 
   /md5@2.3.0:
     resolution: {integrity: sha512-T1GITYmFaKuO91vxyoQMFETst+O71VUPEU3ze5GNzDm0OWdP8v1ziTaAEPUr/3kLsY3Sftgz242A1SetQiDL7g==}
