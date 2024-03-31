@@ -2,7 +2,7 @@
 	import { Github, Gitlab } from 'lucide-svelte';
 </script>
 
-<form method="POST" action="/auth?/register" class="flex w-96 flex-col gap-3 rounded-md p-5">
+<form method="POST" class="flex w-96 flex-col gap-3 rounded-md p-5">
 	<h2 class="mb-2 text-center text-xl font-bold brightness-90">Create an Account</h2>
 	<div class="flex h-14 w-full gap-2">
 		<button
