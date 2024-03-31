@@ -31,6 +31,8 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@supabase/ssr": "^0.1.0",
+		"@supabase/supabase-js": "^2.41.1",
 		"bits-ui": "^0.21.1",
 		"lucide-svelte": "^0.363.0",
 		"openai": "^4.29.2"
