@@ -21,7 +21,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 		data: { user }
 	} = await event.locals.supabase.auth.getUser();
 
-	console.log('user', user);
+	if (event.url.pathname.startsWith('/auth') && user) {
+		throw redirect(307, '/');
+	}
 
 	if (event.url.pathname.startsWith('/courses') && !user) {
 		throw redirect(307, '/auth/login');

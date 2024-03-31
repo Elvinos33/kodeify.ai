@@ -23,10 +23,10 @@ export const actions = {
 			password
 		});
 
-		if (data) {
-			throw redirect(303, '/');
-		} else if (error) {
+		if (error) {
 			return fail(400, { error: error.message });
+		} else {
+			throw redirect(303, '/');
 		}
 	}
 } satisfies Actions;

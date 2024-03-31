@@ -10,18 +10,20 @@ export const actions = {
 		const formData = await request.formData();
 		const email = formData.get('email') as string;
 		const password = formData.get('password') as string;
+
 		if (!email || !password) {
 			return fail(400, { error: 'Email, password, and confirm password are required' });
 		}
 
-		const { data, error } = await supabase.auth.signInWithPassword({
+		const { error } = await supabase.auth.signInWithPassword({
 			email,
 			password
 		});
-		if (data) {
-			throw redirect(303, '/');
-		} else if (error) {
+
+		if (error) {
 			return fail(400, { error: error.message });
+		} else {
+			throw redirect(303, '/');
 		}
 	}
 } satisfies Actions;

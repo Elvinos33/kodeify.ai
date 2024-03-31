@@ -1,8 +1,14 @@
-<script>
+<script lang="ts">
 	import { Github, Gitlab } from 'lucide-svelte';
+	import { enhance } from '$app/forms';
+
+	export let error: string | undefined;
 </script>
 
-<form method="POST" class="flex w-96 flex-col gap-3 rounded-md p-5">
+<form method="POST" use:enhance class="flex w-96 flex-col gap-3 rounded-md p-5">
+	{#if error}
+		<p class="text-center text-sm text-red-500">{error}</p>
+	{/if}
 	<h2 class="mb-2 text-center text-xl font-bold brightness-90">Log in</h2>
 	<div class="flex h-14 w-full gap-2">
 		<button
