@@ -1,18 +1,26 @@
 import type { Actions } from './$types';
 import { fail } from '@sveltejs/kit';
+import { OPENAI_API_KEY } from '$env/static/private';
 import OpenAI from 'openai';
 
-const openai = new OpenAI();
+const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 
 export const actions = {
 	default: async ({ request }) => {
 		const formData = await request.formData();
 		const selectedTech = formData.get('selectedTech');
+		let threadMessage: string;
+
+		if (Math.floor(Math.random() * 1001) > 500) {
+			threadMessage = `Tell me about ${selectedTech} like you were Napoleon and i was your soldier.`;
+		} else {
+			threadMessage = `Tell me about ${selectedTech}.`;
+		}
 
 		const thread = await openai.beta.threads.create();
 		const message = await openai.beta.threads.messages.create(thread.id, {
 			role: 'user',
-			content: 'Tell me about ' + selectedTech + '.'
+			content: threadMessage
 		});
 
 		let run = await openai.beta.threads.runs.create(thread.id, {
